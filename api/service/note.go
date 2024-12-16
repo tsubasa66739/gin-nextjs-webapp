@@ -2,7 +2,6 @@ package service
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/tsubasa66739/gin-nextjs-webapp/repository"
 	"github.com/tsubasa66739/gin-nextjs-webapp/schema"
@@ -12,7 +11,7 @@ import (
 func GetNote(id uint) (repository.TrnNote, error) {
 	note := repository.TrnNote{}
 	note.ID = &id
-	err := repository.GetNoteById(&note)
+	err := note.GetById()
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return note, ErrNotFound
 	}
@@ -25,7 +24,7 @@ func CreateNote(req *schema.PostNoteReq) (repository.TrnNote, error) {
 		Body:  req.Body,
 	}
 	note.ID = nil
-	err := repository.InsertNote(&note)
+	err := note.Insert()
 	return note, err
 }
 
@@ -36,10 +35,9 @@ func UpdateNote(id uint, req *schema.PutNoteReq) error {
 	}
 
 	req.Note.ID = &id
-	fmt.Println(req.Note)
-	if err = repository.UpdateNote(&req.Note); err != nil {
+	if err = req.Note.Update(); err != nil {
 		return err
 	}
 
-	return repository.InsertNoteHst(&note)
+	return note.InsertHst()
 }

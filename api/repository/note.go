@@ -15,22 +15,25 @@ type HstNote struct {
 	NoteID uint
 }
 
-func GetNoteById(note *TrnNote) error {
+func (note *TrnNote) GetById() error {
 	return db.Take(&note).Error
 }
 
-func InsertNote(note *TrnNote) error {
+func (note *TrnNote) Insert() error {
+	// 新規作成して取得する
 	return db.Clauses(clause.Returning{}).Create(&note).Error
 }
 
-func UpdateNote(note *TrnNote) error {
+func (note *TrnNote) Update() error {
+	// CreatedAt以外を更新する
 	return db.Select("*").Omit("CreatedAt").Save(&note).Error
 }
 
-func InsertNoteHst(note *TrnNote) error {
+func (note *TrnNote) InsertHst() error {
 	noteHst := HstNote{
 		TrnNote: note,
 		NoteID:  *note.ID,
 	}
+	// IDは履歴テーブルの主キーなので除外する
 	return db.Omit("ID").Create(&noteHst).Error
 }
