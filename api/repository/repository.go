@@ -3,23 +3,14 @@ package repository
 import (
 	"fmt"
 	"os"
-	"time"
 
+	"github.com/tsubasa66739/gin-nextjs-webapp/repository/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	gormSchema "gorm.io/gorm/schema"
 )
 
-var db *gorm.DB
-
-type Model struct {
-	ID        *uint          `gorm:"primaryKey"`
-	CreatedAt time.Time      `gorm:"default:now()"`
-	UpdatedAt time.Time      `gorm:"default:now()"`
-	DeletedAt gorm.DeletedAt `gorm:"index"`
-}
-
-func Setup() {
+func Setup() *gorm.DB {
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Tokyo",
 		os.Getenv("POSTGRES_HOST"),
 		os.Getenv("POSTGRES_USER"),
@@ -34,13 +25,13 @@ func Setup() {
 			SingularTable: true,  // テーブル名を複数形にしない
 		},
 	}
-	var err error
-	db, err = gorm.Open(postgres.Open(dsn), dbConfig)
+	db, err := gorm.Open(postgres.Open(dsn), dbConfig)
 	if err != nil {
 		panic(err.Error())
 	}
 	db.AutoMigrate(
-		&TrnNote{},
-		&HstNote{},
+		&model.TrnNote{},
+		&model.HstNote{},
 	)
+	return db
 }

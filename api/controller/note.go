@@ -6,13 +6,31 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tsubasa66739/gin-nextjs-webapp/repository"
-	"github.com/tsubasa66739/gin-nextjs-webapp/schema"
+	"github.com/tsubasa66739/gin-nextjs-webapp/controller/schema"
+	"github.com/tsubasa66739/gin-nextjs-webapp/repository/model"
 	"github.com/tsubasa66739/gin-nextjs-webapp/service"
 )
 
+type NoteController interface {
+	GetNote(c *gin.Context)
+	PostNote(c *gin.Context)
+	PutNote(c *gin.Context)
+}
+
+type noteController struct {
+	noteService service.NoteService
+}
+
+func NewNoteController(
+	noteService service.NoteService,
+) NoteController {
+	return &noteController{
+		noteService: noteService,
+	}
+}
+
 // ノートを取得する
-func GetNote(c *gin.Context) {
+func (n *noteController) GetNote(c *gin.Context) {
 
 	// リクエストバリデーション
 	id, err := strconv.ParseUint(c.Param("id"), 10, 64)
@@ -21,8 +39,8 @@ func GetNote(c *gin.Context) {
 	}
 
 	// 対象のノート取得
-	var note repository.TrnNote
-	note, err = service.GetNote(uint(id))
+	var note model.TrnNote
+	note, err = n.noteService.GetNote(uint(id))
 
 	// レスポンスをハンドリングする
 	if err != nil {
@@ -48,7 +66,7 @@ func GetNote(c *gin.Context) {
 	})
 }
 
-func PostNote(c *gin.Context) {
+func (n *noteController) PostNote(c *gin.Context) {
 
 	// リクエストバリデーション
 	request := schema.PostNoteReq{}
@@ -58,7 +76,7 @@ func PostNote(c *gin.Context) {
 	}
 
 	// ノート作成
-	note, err := service.CreateNote(&request)
+	note, err := n.noteService.CreateNote(&request)
 
 	// レスポンスをハンドリングする
 	if err != nil {
@@ -74,7 +92,7 @@ func PostNote(c *gin.Context) {
 	})
 }
 
-func PutNote(c *gin.Context) {
+func (n *noteController) PutNote(c *gin.Context) {
 
 	// リクエストバリデーション
 	req := schema.PutNoteReq{}
@@ -90,7 +108,7 @@ func PutNote(c *gin.Context) {
 	}
 
 	// ノート更新
-	err = service.UpdateNote(uint(id), &req)
+	err = n.noteService.UpdateNote(uint(id), &req)
 
 	// レスポンスをハンドリングする
 	if err != nil {

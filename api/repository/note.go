@@ -1,39 +1,49 @@
 package repository
 
 import (
+	"github.com/tsubasa66739/gin-nextjs-webapp/repository/model"
+	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )
 
-type TrnNote struct {
-	Model
-	Title string
-	Body  string
+type NoteRepository interface {
+	GetById(note *model.TrnNote) error
+	Insert(note *model.TrnNote) error
+	Update(note *model.TrnNote) error
+	InsertHst(note *model.TrnNote) error
 }
 
-type HstNote struct {
-	*TrnNote
-	NoteID uint
+type noteRepository struct {
+	db *gorm.DB
 }
 
-func (note *TrnNote) GetById() error {
-	return db.Take(&note).Error
+func NewNoteRepository(
+	db *gorm.DB,
+) NoteRepository {
+	return &noteRepository{
+		db: db,
+	}
 }
 
-func (note *TrnNote) Insert() error {
+func (n *noteRepository) GetById(note *model.TrnNote) error {
+	return n.db.Take(&note).Error
+}
+
+func (n *noteRepository) Insert(note *model.TrnNote) error {
 	// 新規作成して取得する
-	return db.Clauses(clause.Returning{}).Create(&note).Error
+	return n.db.Clauses(clause.Returning{}).Create(&note).Error
 }
 
-func (note *TrnNote) Update() error {
+func (n *noteRepository) Update(note *model.TrnNote) error {
 	// CreatedAt以外を更新する
-	return db.Select("*").Omit("CreatedAt").Save(&note).Error
+	return n.db.Select("*").Omit("CreatedAt").Save(&note).Error
 }
 
-func (note *TrnNote) InsertHst() error {
-	noteHst := HstNote{
+func (n *noteRepository) InsertHst(note *model.TrnNote) error {
+	noteHst := model.HstNote{
 		TrnNote: note,
 		NoteID:  *note.ID,
 	}
 	// IDは履歴テーブルの主キーなので除外する
-	return db.Omit("ID").Create(&noteHst).Error
+	return n.db.Omit("ID").Create(&noteHst).Error
 }

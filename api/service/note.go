@@ -3,41 +3,60 @@ package service
 import (
 	"errors"
 
+	"github.com/tsubasa66739/gin-nextjs-webapp/controller/schema"
 	"github.com/tsubasa66739/gin-nextjs-webapp/repository"
-	"github.com/tsubasa66739/gin-nextjs-webapp/schema"
+	"github.com/tsubasa66739/gin-nextjs-webapp/repository/model"
 	"gorm.io/gorm"
 )
 
-func GetNote(id uint) (repository.TrnNote, error) {
-	note := repository.TrnNote{}
+type NoteService interface {
+	GetNote(id uint) (model.TrnNote, error)
+	CreateNote(req *schema.PostNoteReq) (model.TrnNote, error)
+	UpdateNote(id uint, req *schema.PutNoteReq) error
+}
+
+type noteService struct {
+	noteRepo repository.NoteRepository
+}
+
+func NewNoteService(
+	noteRepo repository.NoteRepository,
+) NoteService {
+	return &noteService{
+		noteRepo: noteRepo,
+	}
+}
+
+func (n *noteService) GetNote(id uint) (model.TrnNote, error) {
+	note := model.TrnNote{}
 	note.ID = &id
-	err := note.GetById()
+	err := n.noteRepo.GetById(&note)
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return note, ErrNotFound
 	}
 	return note, err
 }
 
-func CreateNote(req *schema.PostNoteReq) (repository.TrnNote, error) {
-	note := repository.TrnNote{
+func (n *noteService) CreateNote(req *schema.PostNoteReq) (model.TrnNote, error) {
+	note := model.TrnNote{
 		Title: req.Title,
 		Body:  req.Body,
 	}
 	note.ID = nil
-	err := note.Insert()
+	err := n.noteRepo.Insert(&note)
 	return note, err
 }
 
-func UpdateNote(id uint, req *schema.PutNoteReq) error {
-	note, err := GetNote(id)
+func (n *noteService) UpdateNote(id uint, req *schema.PutNoteReq) error {
+	note, err := n.GetNote(id)
 	if err != nil {
 		return err
 	}
 
 	req.Note.ID = &id
-	if err = req.Note.Update(); err != nil {
+	if err = n.noteRepo.Update(&req.Note); err != nil {
 		return err
 	}
 
-	return note.InsertHst()
+	return n.noteRepo.InsertHst(&note)
 }

@@ -1,6 +1,8 @@
 package schema
 
-import "github.com/tsubasa66739/gin-nextjs-webapp/repository"
+import (
+	"github.com/tsubasa66739/gin-nextjs-webapp/repository/model"
+)
 
 type PostNoteReq struct {
 	Title string `json:"title" binding:"required"`
@@ -8,10 +10,10 @@ type PostNoteReq struct {
 }
 
 type PutNoteReq struct {
-	Note repository.TrnNote
+	Note model.TrnNote
 }
 
 type NoteRes struct {
-	Note    repository.TrnNote
+	Note    model.TrnNote
 	Message string
 }
