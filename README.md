@@ -1,4 +1,4 @@
-# コンテナ起動
+## コンテナ起動
 
 起動と停止
 
@@ -17,16 +17,16 @@ docker compose stop
 docker compose start
 ```
 
-## DB接続
+### DB接続
 
 ```bash
 psql -h localhost -U postgres
 Password for user postgres: ideas
 ```
 
-# API
+## API
 
-## 起動
+### 起動
 
 ```bash
 cd api
@@ -43,7 +43,7 @@ curl -X POST -H 'Content-Type: application/json' -d '{"title":"note test", "body
 curl localhost:8080/api/note/1
 ```
 
-## テスト
+### テスト
 
 モックの生成
 
@@ -63,7 +63,7 @@ go test ./...
 go test ./service/...
 ```
 
-## 構成
+### 構成
 
 ```bash
 api/
