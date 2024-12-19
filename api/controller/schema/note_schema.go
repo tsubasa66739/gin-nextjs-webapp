@@ -10,7 +10,8 @@ type PostNoteReq struct {
 }
 
 type PutNoteReq struct {
-	Note model.TrnNote
+	Title string `json:"title" binding:"required"`
+	Body  string `json:"body"`
 }
 
 type NoteRes struct {

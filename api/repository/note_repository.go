@@ -10,7 +10,7 @@ type NoteRepository interface {
 	GetById(note *model.TrnNote) error
 	Insert(note *model.TrnNote) error
 	Update(note *model.TrnNote) error
-	InsertHst(note *model.TrnNote) error
+	InsertHst(note model.TrnNote) error
 }
 
 type noteRepository struct {
@@ -35,13 +35,12 @@ func (n *noteRepository) Insert(note *model.TrnNote) error {
 }
 
 func (n *noteRepository) Update(note *model.TrnNote) error {
-	// CreatedAt以外を更新する
-	return n.db.Select("*").Omit("CreatedAt").Save(&note).Error
+	return n.db.Save(&note).Error
 }
 
-func (n *noteRepository) InsertHst(note *model.TrnNote) error {
+func (n *noteRepository) InsertHst(note model.TrnNote) error {
 	noteHst := model.HstNote{
-		TrnNote: note,
+		TrnNote: &note,
 		NoteID:  *note.ID,
 	}
 	// IDは履歴テーブルの主キーなので除外する

@@ -53,10 +53,11 @@ func (n *noteService) UpdateNote(id uint, req *schema.PutNoteReq) error {
 		return err
 	}
 
-	req.Note.ID = &id
-	if err = n.noteRepo.Update(&req.Note); err != nil {
+	if err = n.noteRepo.InsertHst(note); err != nil {
 		return err
 	}
 
-	return n.noteRepo.InsertHst(&note)
+	note.Title = req.Title
+	note.Body = req.Body
+	return n.noteRepo.Update(&note)
 }
