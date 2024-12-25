@@ -17,7 +17,7 @@ docker compose stop
 docker compose start
 ```
 
-### DB接続
+### DB 接続
 
 ```bash
 psql -h localhost -U postgres
@@ -75,7 +75,7 @@ api/
 │       └── schema.go # エラーレスポンスの定義等
 ├── repository        # DB処理
 │   ├── model         # DB定義
-│   │   ├── model.go  # モデルの共通項目の定義
+│   │   └── model.go  # モデルの共通項目の定義
 │   └── repository.go # DB接続設定
 ├── service           # 引数（リクエスト等）を元にDB処理を呼び出す
 │   └── service.go    # エラーの定義
@@ -88,4 +88,34 @@ api/
 controller -> service -> repository
 ```
 
-utilはどのパッケージからも必要に応じて参照して良い。ただし、utilそのものはどこにも依存してはいけない。
+util はどのパッケージからも必要に応じて参照して良い。ただし、util そのものはどこにも依存してはいけない。
+
+## WebApp
+
+実行
+
+```bash
+cd webapp
+
+npm run dev
+```
+
+### 構成
+
+```bash
+webapp
+└── app
+    ├── (home)            # / のページ
+    │   ├── _component    # / の共通クライアントコンポーネント
+    │   ├── calendar      # /calendar のページ
+    │   │   └── page.tsx  # /calendar のページ本体
+    │   ├── layout.tsx    # / のページレイアウト
+    │   └── page.tsx      # / のページ本体
+    ├── hoge              # /hoge のページ
+    │   ├── _component    # /hoge の共通クライアントコンポーネント
+    │   ├── fuga          # /hoge/fuga のページ
+    │   │   └── page.tsx  # /hoge/fuga のページ本体
+    │   ├── layout.tsx    # /hoge のページレイアウト
+    │   └── page.tsx      # /hoge のページ本体
+    └── layout.tsx        # 全体のレイアウト
+```

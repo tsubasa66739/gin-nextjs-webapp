@@ -36,7 +36,7 @@ func TestGetNote(t *testing.T) {
 		t.Fatal(err)
 	}
 	if *note.ID != 2 {
-		t.Errorf("TestGetNote want: 2, got: %d", *note.ID)
+		t.Errorf("TestGetNote, want: 2, got: %d", *note.ID)
 	}
 }
 
@@ -62,6 +62,6 @@ func TestGetNote_NotFound(t *testing.T) {
 	if err == nil {
 		t.Fail()
 	} else if !errors.Is(ErrNotFound, err) {
-		t.Errorf("TestGetNote_NotFound: want: service.ErrNotFound, got: %#v", err)
+		t.Errorf("TestGetNote_NotFound, want: service.ErrNotFound, got: %#v", err)
 	}
 }
