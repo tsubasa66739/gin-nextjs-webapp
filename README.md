@@ -1,10 +1,35 @@
+## Recommended VSCode Extension
+
+Go: https://marketplace.visualstudio.com/items?itemName=golang.Go
+
+Prettier: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+
+Tailwind CSS IntelliSense: https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
+
+## 環境設定
+
+`api/.env`
+
+```properties
+POSTGRES_VERSION=17
+POSTGRES_HOST=localhost
+POSTGRES_USER=postgres
+POSTGRES_PASS=ideas
+POSTGRES_DB=postgres
+POSTGRES_PORT=5432
+```
+
+`webapp/.env`
+
+WIP
+
 ## コンテナ起動
 
 起動と停止
 
 ```bash
-docker compose --env-file .env up -d
-docker compose --env-file .env down
+docker compose --env-file api/.env up -d
+docker compose --env-file api/.env down
 
 # 起動中のコンテナ確認
 docker ps
@@ -105,17 +130,24 @@ npm run dev
 ```bash
 webapp
 └── app
-    ├── (home)            # / のページ
-    │   ├── _component    # / の共通クライアントコンポーネント
-    │   ├── calendar      # /calendar のページ
-    │   │   └── page.tsx  # /calendar のページ本体
-    │   ├── layout.tsx    # / のページレイアウト
-    │   └── page.tsx      # / のページ本体
-    ├── hoge              # /hoge のページ
-    │   ├── _component    # /hoge の共通クライアントコンポーネント
-    │   ├── fuga          # /hoge/fuga のページ
-    │   │   └── page.tsx  # /hoge/fuga のページ本体
-    │   ├── layout.tsx    # /hoge のページレイアウト
-    │   └── page.tsx      # /hoge のページ本体
-    └── layout.tsx        # 全体のレイアウト
+    ├── (home)
+    │   ├── _component      # / の共通クライアントコンポーネント
+    │   ├── (home)
+    │   │   ├── home_presentation.tsx  # / のページ本体
+    │   │   └── page.tsx    # / のサーバ処理
+    │   ├── calendar        # /calendar のページ
+    │   │   ├── calendar_presentation.tsx  # /calendar のページ本体
+    │   │   └── page.tsx    # /calendar のサーバ処理
+    │   └── layout.tsx      # / のページレイアウト
+    ├── hoge
+    │   ├── _component      # /hoge の共通クライアントコンポーネント
+    │   ├── (hoge)
+    │   │   ├── hoge_presentation.tsx  # /hoge のページ本体
+    │   │   └── page.tsx    # /hoge のサーバ処理
+    │   ├── fuga            # /hoge/fuga のページ
+    │   │   ├── fuga_presentation.tsx  # /hoge/fuga のページ本体
+    │   │   └── page.tsx    # /hoge/fuga のサーバ処理
+    │   └── layout.tsx      # /hoge のページレイアウト
+    ├── _component          # 全体の共通クライアントコンポーネント
+    └── layout.tsx          # 全体のレイアウト
 ```

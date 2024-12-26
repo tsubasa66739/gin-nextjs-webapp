@@ -24,10 +24,11 @@ function NavItem({ path, name, icon }: NavItemProps) {
     <Tooltip content={name} delayDuration={1000} side="right">
       <IconButton
         variant="ghost"
+        color="blue"
         className={
           pathname === path
-            ? "text-neutral-950 cursor-pointer"
-            : "text-neutral-400 hover:text-neutral-950 cursor-pointer"
+            ? "text-neutral-950 bg-slate-200 cursor-pointer"
+            : "text-neutral-400 hover:text-neutral-950 hover:bg-slate-200 cursor-pointer"
         }
         onClick={() => router.push(path)}
       >
@@ -41,18 +42,16 @@ export default function Nav() {
   return (
     <Flex
       direction="column"
-      gap="6"
+      gap="5"
       align="center"
       className="w-10 py-2"
       height="100%"
     >
-      <Flex direction="column" gap="5" height="100%">
-        <NavItem path="/" name="ホーム" icon={AiOutlineHome} />
-        <NavItem path="/calendar" name="カレンダー" icon={AiOutlineCalendar} />
-        <NavItem path="/analytics" name="データ" icon={AiOutlineLineChart} />
-        <div className="flex-grow" />
-        <NavItem path="/setting" name="設定" icon={AiOutlineSetting} />
-      </Flex>
+      <NavItem path="/" name="ホーム" icon={AiOutlineHome} />
+      <NavItem path="/calendar" name="カレンダー" icon={AiOutlineCalendar} />
+      <NavItem path="/analytics" name="データ" icon={AiOutlineLineChart} />
+      <div className="flex-grow" />
+      <NavItem path="/setting" name="設定" icon={AiOutlineSetting} />
     </Flex>
   );
 }
