@@ -12,7 +12,7 @@ export default function DashboardLayout({
       <nav className="p-2 bg-white border-r">
         <Nav />
       </nav>
-      <main className="py-4">{children}</main>
+      <main className="py-4 w-full">{children}</main>
     </Flex>
   );
 }

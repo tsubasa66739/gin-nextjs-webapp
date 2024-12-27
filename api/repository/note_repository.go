@@ -7,6 +7,7 @@ import (
 )
 
 type NoteRepository interface {
+	ListBy(notes *[]model.TrnNote) error
 	GetById(note *model.TrnNote) error
 	Insert(note *model.TrnNote) error
 	Update(note *model.TrnNote) error
@@ -23,6 +24,10 @@ func NewNoteRepository(
 	return &noteRepository{
 		db: db,
 	}
+}
+
+func (n *noteRepository) ListBy(notes *[]model.TrnNote) error {
+	return n.db.Find(&notes).Error
 }
 
 func (n *noteRepository) GetById(note *model.TrnNote) error {

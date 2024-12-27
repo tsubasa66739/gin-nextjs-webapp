@@ -12,6 +12,7 @@ import (
 )
 
 type NoteController interface {
+	ListNote(c *gin.Context)
 	GetNote(c *gin.Context)
 	PostNote(c *gin.Context)
 	PutNote(c *gin.Context)
@@ -27,6 +28,31 @@ func NewNoteController(
 	return &noteController{
 		noteService: noteService,
 	}
+}
+
+func (n *noteController) ListNote(c *gin.Context) {
+	notes, err := n.noteService.GetNoteList()
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, schema.InternalServerError{
+			Err:     err,
+			Message: "Unknown error",
+		})
+		return
+	}
+
+	res := []schema.NoteRes{}
+	for _, note := range notes {
+		r := schema.NoteRes{
+			Title: note.Title,
+			Body:  note.Body,
+		}
+		r.ID = *note.ID
+		r.CreatedAt = note.CreatedAt
+		r.UpdatedAt = note.UpdatedAt
+		res = append(res, r)
+	}
+	c.JSON(http.StatusOK, res)
 }
 
 // ノートを取得する
@@ -60,10 +86,14 @@ func (n *noteController) GetNote(c *gin.Context) {
 	}
 
 	// 正常レスポンス
-	c.JSON(http.StatusOK, schema.NoteRes{
-		Note:    note,
-		Message: "Get note successfully.",
-	})
+	res := schema.NoteRes{
+		Title: note.Title,
+		Body:  note.Body,
+	}
+	res.ID = *note.ID
+	res.CreatedAt = note.CreatedAt
+	res.UpdatedAt = note.UpdatedAt
+	c.JSON(http.StatusOK, res)
 }
 
 func (n *noteController) PostNote(c *gin.Context) {
@@ -86,10 +116,14 @@ func (n *noteController) PostNote(c *gin.Context) {
 	}
 
 	// 正常レスポンス
-	c.JSON(http.StatusOK, schema.NoteRes{
-		Note:    note,
-		Message: "Posting note successfully.",
-	})
+	res := schema.NoteRes{
+		Title: note.Title,
+		Body:  note.Body,
+	}
+	res.ID = *note.ID
+	res.CreatedAt = note.CreatedAt
+	res.UpdatedAt = note.UpdatedAt
+	c.JSON(http.StatusOK, res)
 }
 
 func (n *noteController) PutNote(c *gin.Context) {
@@ -128,7 +162,5 @@ func (n *noteController) PutNote(c *gin.Context) {
 	}
 
 	// 正常レスポンス
-	c.JSON(http.StatusOK, schema.NoteRes{
-		Message: "Putting note successfully.",
-	})
+	c.JSON(http.StatusOK, gin.H{})
 }

@@ -22,6 +22,7 @@ func InitRouter(db *gorm.DB) *gin.Engine {
 
 	api := r.Group("/api")
 	{
+		api.GET("/note", noteController.ListNote)
 		api.GET("/note/:id", noteController.GetNote)
 		api.POST("/note", noteController.PostNote)
 		api.PUT(("/note/:id"), noteController.PutNote)

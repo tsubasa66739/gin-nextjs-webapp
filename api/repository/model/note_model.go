@@ -1,9 +1,9 @@
 package model
 
 type TrnNote struct {
-	Model
 	Title string
 	Body  string
+	Model
 }
 
 type HstNote struct {

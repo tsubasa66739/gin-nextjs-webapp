@@ -27,8 +27,8 @@ function NavItem({ path, name, icon }: NavItemProps) {
         color="blue"
         className={
           pathname === path
-            ? "text-neutral-950 bg-slate-200 cursor-pointer"
-            : "text-neutral-400 hover:text-neutral-950 hover:bg-slate-200 cursor-pointer"
+            ? "text-neutral-950 bg-slate-200 hover:bg-indigo-100 cursor-pointer"
+            : "text-neutral-400 hover:text-neutral-950 hover:bg-indigo-100 cursor-pointer"
         }
         onClick={() => router.push(path)}
       >

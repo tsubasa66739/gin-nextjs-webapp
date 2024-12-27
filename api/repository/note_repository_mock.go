@@ -82,6 +82,20 @@ func (mr *MockNoteRepositoryMockRecorder) InsertHst(note any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InsertHst", reflect.TypeOf((*MockNoteRepository)(nil).InsertHst), note)
 }
 
+// ListBy mocks base method.
+func (m *MockNoteRepository) ListBy(notes *[]model.TrnNote) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListBy", notes)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// ListBy indicates an expected call of ListBy.
+func (mr *MockNoteRepositoryMockRecorder) ListBy(notes any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListBy", reflect.TypeOf((*MockNoteRepository)(nil).ListBy), notes)
+}
+
 // Update mocks base method.
 func (m *MockNoteRepository) Update(note *model.TrnNote) error {
 	m.ctrl.T.Helper()

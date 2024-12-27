@@ -10,6 +10,7 @@ import (
 )
 
 type NoteService interface {
+	GetNoteList() ([]model.TrnNote, error)
 	GetNote(id uint) (model.TrnNote, error)
 	CreateNote(req *schema.PostNoteReq) (model.TrnNote, error)
 	UpdateNote(id uint, req *schema.PutNoteReq) error
@@ -25,6 +26,12 @@ func NewNoteService(
 	return &noteService{
 		noteRepo: noteRepo,
 	}
+}
+
+func (n *noteService) GetNoteList() ([]model.TrnNote, error) {
+	notes := []model.TrnNote{}
+	err := n.noteRepo.ListBy(&notes)
+	return notes, err
 }
 
 func (n *noteService) GetNote(id uint) (model.TrnNote, error) {
