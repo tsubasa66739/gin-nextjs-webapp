@@ -30,7 +30,7 @@ export default function HomePresentation({ notes }: HomePresentationProps) {
   return (
     <div className="px-3">
       <div className="flex justify-end mb-4 gap-2">
-        <Button color="default" size="sm">
+        <Button color="primary" size="sm" variant="bordered">
           Other control
         </Button>
         <Button color="primary" size="sm">
@@ -47,7 +47,7 @@ export default function HomePresentation({ notes }: HomePresentationProps) {
         <TableBody>
           {notes.map((n: NoteResponse) => {
             return (
-              <TableRow key={n.id} className="border-b">
+              <TableRow key={n.id} className="border-b hover:bg-gray-100">
                 <TableCell>{n.title}</TableCell>
                 <TableCell>{n.body}</TableCell>
                 <TableCell>{formatDatetime(n.updatedAt)}</TableCell>

@@ -117,11 +117,16 @@ util はどのパッケージからも必要に応じて参照して良い。た
 
 ## WebApp
 
-実行
+パッケージインストール（初回、パッケージ更新時のみ）
 
 ```bash
 cd webapp
+npm i
+```
 
+実行
+
+```bash
 npm run dev
 ```
 
@@ -149,5 +154,6 @@ webapp
     │   │   └── page.tsx    # /hoge/fuga のサーバ処理
     │   └── layout.tsx      # /hoge のページレイアウト
     ├── _component          # 全体の共通クライアントコンポーネント
-    └── layout.tsx          # 全体のレイアウト
+    ├── layout.tsx          # 全体のレイアウト
+    └── shcema              # リクエスト/レスポンス情報
 ```
