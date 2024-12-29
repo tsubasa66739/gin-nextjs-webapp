@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Theme } from "@radix-ui/themes";
 
 export const metadata: Metadata = {
   title: "Gin Next.js App",
@@ -14,9 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body>
-        <Theme scaling="100%">{children}</Theme>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

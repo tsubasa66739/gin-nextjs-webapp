@@ -1,6 +1,6 @@
 "use client";
 
-import { Flex, IconButton, Tooltip } from "@radix-ui/themes";
+import { Button, Tooltip } from "@nextui-org/react";
 import { usePathname, useRouter } from "next/navigation";
 import { IconType } from "react-icons";
 import {
@@ -21,37 +21,38 @@ function NavItem({ path, name, icon }: NavItemProps) {
   const pathname = usePathname();
 
   return (
-    <Tooltip content={name} delayDuration={1000} side="right">
-      <IconButton
-        variant="ghost"
-        color="blue"
+    <Tooltip
+      content={name}
+      placement="right"
+      size="sm"
+      delay={700}
+      closeDelay={100}
+    >
+      <Button
+        isIconOnly
+        color="primary"
+        variant="light"
         className={
           pathname === path
-            ? "text-neutral-950 bg-slate-200 hover:bg-indigo-100 cursor-pointer"
-            : "text-neutral-400 hover:text-neutral-950 hover:bg-indigo-100 cursor-pointer"
+            ? "text-neutral-950 bg-gray-200"
+            : "text-neutral-400 hover:text-neutral-950"
         }
-        onClick={() => router.push(path)}
+        onPress={() => router.push(path)}
       >
         {icon({ size: 24 })}
-      </IconButton>
+      </Button>
     </Tooltip>
   );
 }
 
 export default function Nav() {
   return (
-    <Flex
-      direction="column"
-      gap="5"
-      align="center"
-      className="w-10 py-2"
-      height="100%"
-    >
+    <div className="flex flex-col gap-5 align-middle w-10 py-2 h-full">
       <NavItem path="/" name="ホーム" icon={AiOutlineHome} />
       <NavItem path="/calendar" name="カレンダー" icon={AiOutlineCalendar} />
       <NavItem path="/analytics" name="データ" icon={AiOutlineLineChart} />
       <div className="flex-grow" />
       <NavItem path="/setting" name="設定" icon={AiOutlineSetting} />
-    </Flex>
+    </div>
   );
 }
