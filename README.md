@@ -21,7 +21,9 @@ POSTGRES_PORT=5432
 
 `webapp/.env`
 
-WIP
+```properties
+API_URL=http://localhost:8080
+```
 
 ## コンテナ起動
 
