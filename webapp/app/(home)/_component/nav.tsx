@@ -10,11 +10,11 @@ import {
   AiOutlineSetting,
 } from "react-icons/ai";
 
-type NavItemProps = {
+interface NavItemProps {
   path: string;
   name: string;
   icon: IconType;
-};
+}
 
 function NavItem({ path, name, icon }: NavItemProps) {
   const router = useRouter();

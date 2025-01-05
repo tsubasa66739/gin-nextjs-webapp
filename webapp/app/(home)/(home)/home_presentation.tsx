@@ -44,7 +44,8 @@ export default function HomePresentation({ notes }: HomePresentationProps) {
           <TableColumn>更新日時</TableColumn>
           <TableColumn>{""}</TableColumn>
         </TableHeader>
-        <TableBody>
+
+        <TableBody emptyContent={"No data."}>
           {notes.map((n: NoteResponse) => {
             return (
               <TableRow key={n.id} className="border-b hover:bg-gray-100">
