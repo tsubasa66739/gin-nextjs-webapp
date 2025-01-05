@@ -139,8 +139,11 @@ webapp
 └── app
     ├── (home)
     │   ├── _component      # / の共通クライアントコンポーネント
+    │   │   ├── nav.test.tsx # nav.tsx のテスト
+    │   │   └── nav.tsx
     │   ├── (home)
     │   │   ├── home_presentation.tsx  # / のページ本体
+    │   │   ├── home_presentation.test.tsx  # home_presentation.tsx のテスト
     │   │   └── page.tsx    # / のサーバ処理
     │   ├── calendar        # /calendar のページ
     │   │   ├── calendar_presentation.tsx  # /calendar のページ本体
@@ -150,9 +153,11 @@ webapp
     │   ├── _component      # /hoge の共通クライアントコンポーネント
     │   ├── (hoge)
     │   │   ├── hoge_presentation.tsx  # /hoge のページ本体
+    │   │   ├── hoge_presentation.test.tsx  # hoge_presentation.tsx のテスト
     │   │   └── page.tsx    # /hoge のサーバ処理
     │   ├── fuga            # /hoge/fuga のページ
     │   │   ├── fuga_presentation.tsx  # /hoge/fuga のページ本体
+    │   │   ├── fuga_presentation.test.tsx  # fuga_presentation.tsx のテスト
     │   │   └── page.tsx    # /hoge/fuga のサーバ処理
     │   └── layout.tsx      # /hoge のページレイアウト
     ├── _component          # 全体の共通クライアントコンポーネント

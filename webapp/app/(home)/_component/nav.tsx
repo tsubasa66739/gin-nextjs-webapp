@@ -22,6 +22,7 @@ function NavItem({ path, name, icon }: NavItemProps) {
 
   return (
     <Tooltip
+      aria-label={name}
       content={name}
       placement="right"
       size="sm"
@@ -29,6 +30,7 @@ function NavItem({ path, name, icon }: NavItemProps) {
       closeDelay={100}
     >
       <Button
+        aria-label={name}
         isIconOnly
         color="primary"
         variant="light"
