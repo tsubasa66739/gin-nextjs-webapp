@@ -47,7 +47,9 @@ func TestGetNote(t *testing.T) {
 	noteCtrl.GetNote(c)
 
 	var resBody map[string]interface{}
-	_ = json.Unmarshal(res.Body.Bytes(), &resBody)
+	if err := json.Unmarshal(res.Body.Bytes(), &resBody); err != nil {
+		t.Fatal(err)
+	}
 
 	if res.Code != http.StatusOK {
 		t.Errorf("TestGetNote, want: 200, got: %d", res.Code)
