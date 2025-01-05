@@ -90,6 +90,10 @@ go test ./...
 go test ./service/...
 ```
 
+参考に効率化しても
+
+https://zenn.dev/diwamoto/articles/aba45dc2da36b8#%E3%81%93%E3%81%86%E3%81%97%E3%81%9F%E3%82%89%E3%81%A7%E3%81%8D%E3%81%9F
+
 ### 構成
 
 ```bash
