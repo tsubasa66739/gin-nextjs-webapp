@@ -62,6 +62,7 @@ func (n *noteController) GetNote(c *gin.Context) {
 	id, err := strconv.ParseUint(c.Param("id"), 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{})
+		return
 	}
 
 	// 対象のノート取得
@@ -139,6 +140,7 @@ func (n *noteController) PutNote(c *gin.Context) {
 	id, err := strconv.ParseUint(c.Param("id"), 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{})
+		return
 	}
 
 	// ノート更新
