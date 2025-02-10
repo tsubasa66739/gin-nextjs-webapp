@@ -98,6 +98,10 @@ https://zenn.dev/diwamoto/articles/aba45dc2da36b8#%E3%81%93%E3%81%86%E3%81%97%E3
 
 ```bash
 api/
+├── cmd               # バッチ処理コマンド
+│   ├── cmdOne.go     # バッチ処理本体
+│   ├── cmdTwo.go
+│   └── root.go       # バッチ処理入口
 ├── config            # .envの読み込みなどAPIの設定全般
 │   └── config.go
 ├── controller        # リクエストバリデーション、サービスの呼び出し、レスポンスハンドリング
@@ -110,7 +114,9 @@ api/
 │   └── repository.go # DB接続設定
 ├── service           # 引数（リクエスト等）を元にDB処理を呼び出す
 │   └── service.go    # エラーの定義
-└── util              # 共通処理
+├── util              # 共通処理
+├── batch_main.go     # バッチのmain
+└── main.go           # APIのmain
 ```
 
 呼び出し順

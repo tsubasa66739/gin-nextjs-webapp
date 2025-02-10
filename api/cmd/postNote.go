@@ -23,7 +23,7 @@ var postNoteCmd = &cobra.Command{
 	Long: `ノートを新規作成する
 ex)
 $ ./batchMain postNote --title="タイトル" --body="内容"`,
-	Run: execute,
+	Run: runPostNote,
 }
 
 func init() {
@@ -36,7 +36,7 @@ func init() {
 	postNoteCmd.Flags().StringP("body", "b", "", "内容")
 }
 
-func execute(cmd *cobra.Command, args []string) {
+func runPostNote(cmd *cobra.Command, args []string) {
 	fmt.Println("postNote called.")
 	fmt.Printf("Title: %s\n", cmd.Flag("title").Value)
 	fmt.Printf("Body: %s\n", cmd.Flag("body").Value)
