@@ -7,7 +7,12 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/tsubasa66739/gin-nextjs-webapp/config"
+	"github.com/tsubasa66739/gin-nextjs-webapp/repository"
+	"gorm.io/gorm"
 )
+
+var db *gorm.DB
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -19,6 +24,11 @@ examples and usage of using your application. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
+}
+
+func init() {
+	config.Setup()
+	db = repository.Setup()
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

@@ -7,14 +7,10 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	"github.com/tsubasa66739/gin-nextjs-webapp/config"
 	"github.com/tsubasa66739/gin-nextjs-webapp/controller/schema"
 	"github.com/tsubasa66739/gin-nextjs-webapp/repository"
 	"github.com/tsubasa66739/gin-nextjs-webapp/service"
-	"gorm.io/gorm"
 )
-
-var db *gorm.DB
 
 // postNoteCmd represents the postNote command
 var postNoteCmd = &cobra.Command{
@@ -27,9 +23,6 @@ $ ./batchMain postNote --title="タイトル" --body="内容"`,
 }
 
 func init() {
-	config.Setup()
-	db = repository.Setup()
-
 	rootCmd.AddCommand(postNoteCmd)
 
 	postNoteCmd.Flags().StringP("title", "t", "", "タイトル")
