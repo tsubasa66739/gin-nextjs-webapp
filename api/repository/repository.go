@@ -32,6 +32,8 @@ func Setup() *gorm.DB {
 	db.AutoMigrate(
 		&model.TrnNote{},
 		&model.HstNote{},
+		&model.Item{},
+		&model.User{},
 	)
 	return db
 }
