@@ -1,7 +1,9 @@
 package service
 
 import (
-	//"errors"
+	"encoding/csv"
+	"fmt"
+	"os"
 
 	"github.com/tsubasa66739/gin-nextjs-webapp/controller/schema"
 	"github.com/tsubasa66739/gin-nextjs-webapp/repository"
@@ -15,6 +17,7 @@ type IItemService interface {
 	Create(CreateItemInput *schema.CreateItemInput) (*model.Item, error)
 	Update(itemId uint, updateItemInput *schema.UpdateItemInput) (*model.Item, error)
 	Delete(itemId uint) error
+	ExportItemToCSV(itemCSV string) error
 }
 
 type ItemService struct {
@@ -65,4 +68,29 @@ func (s *ItemService) Update(itemId uint, updateItemInput *schema.UpdateItemInpu
 
 func (s *ItemService) Delete(itemId uint) error {
 	return s.repository.Delete(itemId)
+}
+
+// CSV出力
+func (s *ItemService) ExportItemToCSV(itemCSV string) error {
+	items, err := s.repository.FindAll()
+	if err != nil {
+		return nil
+	}
+	file, err := os.Create(itemCSV)
+	if err != nil {
+		return nil
+	}
+	defer file.Close()
+	writer := csv.NewWriter(file)
+	defer writer.Flush()
+	writer.Write([]string{"ID", "Name", "Price", "Description"})
+	for _, item := range *items {
+		writer.Write([]string{
+			fmt.Sprintf("%d", item.ID),
+			item.Name,
+			fmt.Sprintf("%d", item.Price),
+			item.Description,
+		})
+	}
+	return nil
 }
