@@ -15,9 +15,15 @@ type Model struct {
 
 type Item struct {
 	gorm.Model
-	ID          uint
-	Name        string
-	Price       uint
+	ID          uint   `gorm:"primaryKey"`
+	Name        string `gorm:"not null"`
+	Price       int    `gorm:"not null"`
 	Description string
-	Soldout     bool
+	Soldout     bool `gorm:"not null"`
+}
+
+type User struct {
+	gorm.Model
+	Email    string `gorm:"not null;unique"`
+	Password string `gorm:"not null"`
 }
