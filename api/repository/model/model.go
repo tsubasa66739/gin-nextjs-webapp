@@ -15,15 +15,17 @@ type Model struct {
 
 type Item struct {
 	gorm.Model
-	ID          uint   `gorm:"primaryKey"`
+	// ID          uint   `gorm:"primaryKey"`
 	Name        string `gorm:"not null"`
 	Price       int    `gorm:"not null"`
 	Description string
-	Soldout     bool `gorm:"not null"`
+	Soldout     bool `gorm:"not null;default:false"`
+	UserID      uint //`gorm:"not null"`
 }
 
 type User struct {
 	gorm.Model
 	Email    string `gorm:"not null;unique"`
 	Password string `gorm:"not null"`
+	items    []Item `gorm:"constraint:OnDelete:CASCADE"`
 }

@@ -6,17 +6,17 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var sampleCmd = &cobra.Command{
-	Use:   "sample",
+var itemCmd = &cobra.Command{
+	Use:   "item",
 	Short: "サンプルコマンド",
 	Long:  `サンプルのコマンドです`,
 	Run:   runSample,
 }
 
 func init() {
-	rootCmd.AddCommand(sampleCmd)
+	rootCmd.AddCommand(itemCmd)
 
-	sampleCmd.Flags().StringP("fuga", "f", "", "ふが")
+	itemCmd.Flags().StringP("Name", "f", "", "ふが")
 }
 
 // func add(a int, b int) int {
@@ -24,6 +24,8 @@ func init() {
 // }
 
 func runSample(cmd *cobra.Command, args []string) {
+	fmt.Println("item called.", "TEST TEST")
+	fmt.Printf("Name: %s\n", cmd.Flag("Name").Value)
 	// println("sample called.", "TEST TEST")
 	// fmt.Println("Hello,World!")
 
@@ -60,13 +62,13 @@ func runSample(cmd *cobra.Command, args []string) {
 	// 	fmt.Println("xとyは同じ")
 	// }
 
-	var arr [3]int = [3]int{1, 2, 3}
-	fmt.Println(arr)
+	// var arr [3]int = [3]int{1, 2, 3}
+	// fmt.Println(arr)
 
-	var slice = []int{10, 20, 30, 40}
-	fmt.Println(slice)
+	// var slice = []int{10, 20, 30, 40}
+	// fmt.Println(slice)
 
-	slice = append(slice, 50)
-	fmt.Println(slice)
+	// slice = append(slice, 50)
+	// fmt.Println(slice)
 
 }
