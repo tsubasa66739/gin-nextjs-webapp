@@ -14,4 +14,4 @@ type NoteRes struct {
 	Title string `json:"title"`
 	Body  string `json:"body"`
 	ResSchema
-}
+} //ResSchemaを埋め込んでいる

@@ -12,7 +12,7 @@ import (
 type NoteService interface {
 	GetNoteList() ([]model.TrnNote, error)
 	GetNote(id uint) (model.TrnNote, error)
-	CreateNote(req *schema.PostNoteReq) (model.TrnNote, error)
+	CreateNote(req *schema.PostNoteReq) (model.TrnNote, error) //ポインタを引数として受け取ることでメモリの節約＆呼び出し元に値の変更を反映できる
 	UpdateNote(id uint, req *schema.PutNoteReq) error
 }
 

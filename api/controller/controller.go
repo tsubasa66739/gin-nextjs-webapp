@@ -12,15 +12,15 @@ import (
 func InitRouter(db *gorm.DB, items []model.Item) *gin.Engine {
 	r := gin.Default()
 
-	// Initialize repositories.
+	// レポジトリの初期化
 	noteRepository := repository.NewNoteRepository(db)
 	itemRepository := repository.NewItemRepository(db)
 
-	// Initialize services.
+	// サービスの初期化
 	noteService := service.NewNoteService(noteRepository)
 	itemService := service.NewItemService(itemRepository)
 
-	// Initialize controllers.
+	// コントローラの初期化
 	noteController := NewNoteController(noteService)
 	itemController := NewItemController(itemService)
 

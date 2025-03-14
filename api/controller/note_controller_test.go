@@ -15,8 +15,8 @@ import (
 
 func TestGetNote(t *testing.T) {
 
-	// モック作成
-	mockCtrl := gomock.NewController(t)
+	// モック作成（テスト用の偽物）
+	mockCtrl := gomock.NewController(t) //パッケージでインポートしているgomockを使用
 	mockSvc := service.NewMockNoteService(mockCtrl)
 	mockSvc.EXPECT().
 		GetNote(gomock.Any()).

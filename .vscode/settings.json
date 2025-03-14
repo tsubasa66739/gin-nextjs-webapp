@@ -1,5 +1,5 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",//prettier自動整形
   "[typescriptreact]": {
     "editor.tabSize": 2,
     "editor.insertSpaces": true
@@ -7,8 +7,8 @@
   "[go]": {
     "editor.defaultFormatter": "golang.go",
     "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
+    "editor.codeActionsOnSave": {//保存時自動実行
+      "source.organizeImports": "explicit"//インポート整理（重複や使用しないものを削除）
     },
     "editor.tabSize": 2
   }

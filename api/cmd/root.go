@@ -1,9 +1,12 @@
+//ひな形をブートストラップcobra-cli initで自動生成されるものに追記
+
 /*
 Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 */
 package cmd
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -28,14 +31,15 @@ to quickly create a Cobra application.`,
 
 func init() {
 	config.Setup()
-	db = repository.Setup()
+	db = repository.Setup() //dbにレポジトリのセットアップを格納
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-	err := rootCmd.Execute()
-	if err != nil {
-		os.Exit(1)
+	err := rootCmd.Execute() //rootCmdの実行
+	if err != nil {          //errが無でないならば
+		fmt.Println("プログラムを終了します")
+		os.Exit(1) //プログラムを修了する関数
 	}
 }

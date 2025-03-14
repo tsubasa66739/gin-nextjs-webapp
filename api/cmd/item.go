@@ -14,18 +14,18 @@ var itemCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(itemCmd)
+	rootCmd.AddCommand(itemCmd) //rootCmdのサブコマンドにitemCmdを追加
 
-	itemCmd.Flags().StringP("Name", "f", "", "ふが")
+	itemCmd.Flags().StringP("Name", "f", "", "ふが") //itemCmdにFlagを設定
 }
 
 // func add(a int, b int) int {
 // 	return a + b
 // }
 
-func runSample(cmd *cobra.Command, args []string) {
-	fmt.Println("item called.", "TEST TEST")
-	fmt.Printf("Name: %s\n", cmd.Flag("Name").Value)
+func runSample(cmd *cobra.Command, args []string) { //cobraライブラリの構造を使用
+	fmt.Println("item called.", "TEST TEST")         //文字列毎にスペース、改行あり
+	fmt.Printf("Name: %s\n", cmd.Flag("Name").Value) //引数ごとにスペース、改行無し
 	// println("sample called.", "TEST TEST")
 	// fmt.Println("Hello,World!")
 

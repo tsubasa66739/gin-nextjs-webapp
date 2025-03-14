@@ -1,20 +1,20 @@
 package controller
 
 import (
-	"github.com/gin-gonic/gin"	
-	"github.com/tsubasa66739/gin-nextjs-webapp/service"
-	"github.com/tsubasa66739/gin-nextjs-webapp/dto"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+	"github.com/tsubasa66739/gin-nextjs-webapp/dto"
+	"github.com/tsubasa66739/gin-nextjs-webapp/service"
 )
 
-
 type IItemController interface {
-	FindAll(ctx *gin.Context)
+	FindAll(ctx *gin.Context) //*gin.Contextはクエリパラメータ、パスパラメータ、フォームデータ、ヘッダーなどを取得できる
 	FindById(ctx *gin.Context)
 	Create(ctx *gin.Context)
 	Update(ctx *gin.Context)
-	Delete(ct *gin.Context)
+	Delete(ctx *gin.Context)
 }
 
 type ItemController struct {

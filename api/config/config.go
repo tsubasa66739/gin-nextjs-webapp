@@ -15,7 +15,7 @@ func Setup() {
 
 // .envファイルを読み込む
 func loadEnv() {
-	err := godotenv.Load(".env")
+	err := godotenv.Load(".env") //.envファイルから環境変数を読み込む
 	if err != nil {
 		log.Fatal("Error loading env target", err)
 	}
