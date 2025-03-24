@@ -38,3 +38,10 @@ func Setup() *gorm.DB {
 	)
 	return db
 }
+
+// GORMを使用してtb_itemからアイテムを取得しスライスで返す（返したい）
+func getItemsFromSourceDB(db *gorm.DB) ([]*model.Item, error) {
+	var tb_item []*model.Item
+	result := db.Find(&tb_item)
+	return tb_item, result.Error
+}

@@ -2,15 +2,15 @@ package main
 
 import (
 	"log"
+	// "net/http"
 
+	// "github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/tsubasa66739/gin-nextjs-webapp/config"
 	"github.com/tsubasa66739/gin-nextjs-webapp/controller"
 	"github.com/tsubasa66739/gin-nextjs-webapp/repository"
 	"github.com/tsubasa66739/gin-nextjs-webapp/repository/model"
 	"gorm.io/gorm"
-	// "github.com/tsubasa66739/gin-nextjs-webapp/service"
-	// "github.com/gin-gonic/gin"
 )
 
 var db *gorm.DB
@@ -30,11 +30,30 @@ func main() {
 	server := controller.InitRouter(db, items)
 	server.Run()
 
-	// items := []model.Item{
-	// 	{ID: 1, Name: "商品1", Price: 1000, Description: "説明1", Soldout: false},
-	// 	{ID: 2, Name: "商品2", Price: 2000, Description: "説明2", Soldout: true},
-	// 	{ID: 3, Name: "商品3", Price: 3000, Description: "説明3", Soldout: false},
-	// }
+	// エンドポイント作成用
+	// r := gin.Default()
 
-	// itemRepository := repository.NewItemMemoryRepository(items)
+	// r.POST("/api/item", createItem)
+
+	// r.Run()
 }
+
+// type Item struct {
+// 	ID          uint   `json:"id"`
+// 	Name        string `json:"name"`
+// 	Price       int    `json:"price"`
+// 	Description string `json:"description"`
+// }
+
+// var items []Item
+
+// func createItem(c *gin.Context) {
+// 	var newItem Item
+// 	if err := c.ShouldBindJSON(&newItem); err != nil {
+// 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+// 		return
+// 	}
+// 	newItem.ID = uint(len(items) + 1)
+// 	items = append(items, newItem)
+// 	c.JSON(http.StatusCreated, newItem)
+// }
